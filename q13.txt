@@ -1,0 +1,30 @@
+import json
+import boto3
+#Creating local s3 variable
+s3 = boto3.client('s3')
+
+#Handler Function
+def lambda_handler(event, context):
+    for s in event['Records']:
+    	#Splits the body of the message with delimeter ' ' sent from the SQS
+        msg = s['body'].split()
+        #Collecting the name of the Resources for the list as following
+        #In our convention first we give the src_bucket_name then source_key then target_key
+        src_bucket_name = msg[0]
+        source_key = msg[1]
+        target_key = msg[2]
+        #Printing the Resource Names
+        print(src_bucket_name)
+        print(source_key)
+        print(target_key)
+        
+        #Creating copy_source Dictionary with source details
+        copy_source = {
+            'Bucket': src_bucket_name,
+            'Key': source_key
+        }
+
+        #Copying from source to destination folder within same bucket
+        s3.copy(copy_source, src_bucket_name, target_key)
+    
+

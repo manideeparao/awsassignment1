@@ -1,0 +1,38 @@
+{
+  "Id": "Policy1562929902785",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1562929668829",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::mybucket2822/*",
+      "Principal": "*"
+    },
+    {
+      "Sid": "Stmt1562929706385",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Deny",
+      "Resource": "arn:aws:s3:::mybucket2822/MySecretFolder/*",
+      "Principal": "*"
+    },
+    {
+      "Sid": "Stmt1562929890689",
+      "Action": [
+        "s3:DeleteObject",
+        "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::mybucket2822",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::488599217855:root"
+        ]
+      }
+    }
+  ]
+}

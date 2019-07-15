@@ -1,0 +1,24 @@
+We can add policy conditions to define the ip addresses from where the resources can be used.
+
+{
+    "Id": "S3Policy_1",
+    "Statement": [
+        {
+            "Sid": "IPDeny",
+            "Effect": "Deny",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::my-wicked-awesome-bucket/*",
+            "Condition": {
+                "NotIpAddress": {
+                    "aws:SourceIp":  [
+                    "192.0.2.0/24",
+                    "203.0.113.0/24"
+                ]
+                }
+            }
+        }
+    ]
+}

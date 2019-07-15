@@ -1,0 +1,38 @@
+Step 1 From the EC2 console we click launch an instance option
+Step 2 Choose Ubuntu Server 18.04 form the default AMIs available.
+Step 3 Choose t2.micro instance
+Step 4 Choose your Network
+Step 5 Add your storage for the same and tags
+Step 6 While configuring security group, add a rule that allows connection through HTTP only from your IP address. And 
+also allow NCS protocal to it.
+Step 7 Launch your instance. Make sure that the security group for both the EC2 machine and the EBS machine is the same.
+Step 8 Using SSH login into the Ec2 instance.
+Step 9 After logging into the instance, install apache server using the following commands
+	$ sudo yum -y install httpd
+	$ sudo service httpd start  
+Step 10 Now create a new EFS from the EFS service and copy the EFS ID (my_EFS_id).
+Step 11 Create a subdirectory 
+	$ sudo mkdir varwwwhtmlmy_efs_mount_point
+Step 12 Now we can mount the EFS at this position
+	$ sudo mount -t efs my_efs_id varwwwhtmlmy_efs_mount_point
+Step 13 Now we change the directory to this position
+	$  sudo mkdir my_dir
+Step 14 We change the owner of this directory
+	$  sudo chown  ec2-user my_dir
+Step 15 We will change the access permissions to the directory
+	$  sudo chmod -R o+r my_dir
+Step 16 Move to that directory
+	$  cd my_dir   
+Step 17 Upload your index.html file here
+Step 18 We can access our website from httpEC2-instance-public-DNSmy_efs_mount_pointmy_EFS_idhello.html 
+
+Second part
+
+Step 19 Create a snapshot of this EC2 instance.
+Step 20 Create a volume from this snapshot
+Step 21 Create a new instance in a different region 
+Step 22 Remove its EBS volume and attach the volume created
+
+
+	
+
